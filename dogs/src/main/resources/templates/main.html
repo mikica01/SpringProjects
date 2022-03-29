@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dogs</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<table>
+    <thead>
+        <th>name</th>
+        <th>age</th>
+        <th>gender</th>
+        <th>type</th>
+        <th>length</th>
+        <th>height</th>
+        <th>favourite activity</th>
+        <th>date of birth</th>
+        <th>action</th>
+    </thead>
+    <tbody>
+        <tr th:each="dog : ${dogs}">
+            <td th:text="${dog.name}"></td>
+            <td th:text="${dog.age}"></td>
+            <td th:text="${dog.gender}"></td>
+            <td th:text="${dog.type}"></td>
+            <td th:text="${dog.length}"></td>
+            <td th:text="${dog.height}"></td>
+            <td th:text="${dog.favActivity}"></td>
+            <td th:text="${dog.dateOfBirth}"></td>
+            <td>
+                <form th:action="'/edit/' + ${dog.id}" method="get">
+                    <input type="submit" value="edit">
+                </form>
+                <form th:action="|/delete/${dog.id}|" method="post">
+                    <input type="submit" value="delete">
+                </form>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+    <a href="/add">Add a new dog!</a>
+    <h3 style="color:red" th:text="${error}"></h3>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <span style="font-size: 24px; font-weight: bold" th:text="*{name}"></span>
+        <div class="links">
+            <a th:href="|/users/${userId}/todo|">Add todo</a>
+            <a th:href="|/my-todos/${userId}|">My todos</a>
+            <a th:href="|/users/${userId}|">Profile</a>
+            <a href="/">Login</a>
+            <a href="/registration">Register</a>
+        </div>
+    </header>
+</body>
+</html>

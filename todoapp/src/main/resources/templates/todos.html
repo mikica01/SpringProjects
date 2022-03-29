@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Todos</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body th:object="${user}">
+    <div th:replace="fragments/header.html :: header"></div>
+    <table th:unless="*{todos.isEmpty()}">
+        <thead>
+            <tr>
+                <th>Priority<a th:href="|/users/${userId}/sort?sort=priority&asc=true|">▲</a><a
+                        th:href="|/users/${userId}/sort?sort=priority&asc=false|">▼</a></th>
+                <th>Title<a th:href="|/users/${userId}/sort?sort=title&asc=true|">▲</a><a
+                        th:href="|/users/${userId}/sort?sort=title&asc=false|">▼</a></th>
+                <th>Status</th>
+                <th>Deadline<a th:href="|/users/${userId}/sort?sort=deadline&asc=true|">▲</a><a
+                        th:href="|/users/${userId}/sort?sort=deadline&asc=false|">▼</a></th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="todo : ${todos}">
+                <td th:if="${todo.priority.name() eq 'URGENT'}">
+                    <button disabled style="background-color: red;
+" class="priority"></button>
+                </td>
+                <td th:if="${todo.priority.name() eq 'IMPORTANT'}">
+                    <button disabled style="background-color: orange;
+" class="priority"></button>
+                </td>
+                <td th:if="${todo.priority.name() eq 'CASUAL'}">
+                    <button disabled style="background-color: yellow;
+" class="priority"></button>
+                </td>
+                <td th:if="${todo.priority.name() eq 'DONE'}">
+                    <button disabled style="background-color: green;
+" class="priority"></button>
+                </td>
+                <td th:if="${todo.priority.name() eq 'NONE'}">
+                    <button disabled style="background-color: gray;
+" class="priority"></button>
+                </td>
+                <td th:text="${todo.title}"></td>
+                <td th:text="${todo.status}"></td>
+                <td th:text="${todo.deadline}"></td>
+                <td>
+                    <div class="todoEdit">
+                        <form th:action="|/users/${userId}/todo/${todo.id}|" method="get">
+                            <input type="submit" value="Edit">
+                        </form>
+                        <form th:action="|/todos/delete/${todo.id}|" method="post">
+                            <input type="submit" value="Delete">
+                        </form>
+                        <form th:action="|/todos/${todo.id}/complete?user=${userId}|" method="post">
+                        <input type="submit" value="Complete">
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 style="color: red" th:text="${error}"></h2>
+</body>
+</html>

@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#searchEngine {
+    border-radius: 5px 5px;
+    border: 2px solid #d34645;
+    height: 40px;
+    flex: 1;
+}
+
+.searchDiv {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #25c4d5;
+    margin-bottom: 20px;
+}
+
+#searchButton {
+    background-color: #d34645;
+    color: white;
+    border-radius: 5px 5px;
+    height: 46px;
+    width: 100px;
+    font-size: 20px;
+    margin-left: 16px;
+}
+.searchButton {
+
+}
+#searchButton:hover {
+    background-color: #25c4d5;
+    color: #d34645;
+    transition: all .3s;
+}
+
+h1 {
+    color: #25c4d5;
+    margin-bottom: 10px;
+}
+.searchDiv .searchButton {
+    border:none;
+    padding: 5px 10px;
+    background-color: #d34645;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    margin-right: 32px;
+    text-align: center;
+    height: 45px;
+    margin-bottom: 20px;
+
+}
+.searchDiv .searchButton:hover {
+    background-color: #25c4d5;
+    color: #d34645;
+    transition: all .3s;
+}
+.searchDiv .searchButton:first-of-type {
+    flex:1
+}
+.searchDiv .searchButton:nth-of-type(2) {
+    flex:1
+}
+.searchDiv .searchButton:nth-of-type(3) {
+    flex:1
+}
+.filterButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.filterButtons a {
+    padding: 10px 10px;
+    background-color: #d34645;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    height: fit-content;
+    text-transform: uppercase;
+}
+
+.filterButtons a:hover {
+    background-color: #25c4d5;
+    color: #d34645;
+    transition: all .3s;
+}
+
+label {
+    color: #d05c5b;
+    font-weight: bolder;
+    font-size: 13px;
+    display: block;
+}
+.moreLabel {
+    margin-left: 49%;
+}
+
+#itemTable th {
+    background-color: #25c4d5;
+    color: black;
+    font-weight: bold;
+}
+
+#itemTable th:not(:first-of-type) {
+    border-left: 2px solid white;
+    border-collapse: collapse;
+}
+
+th, td {
+    height: 60px;
+}
+
+tr th, td:last-of-type {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+#more a, #myShop a {
+    text-decoration: none;
+    color: #25c4d5;
+}
+#filterByPrice {
+    flex: 5;
+    height: 40px;
+}
+.hidden {
+    display: none;
+}
+

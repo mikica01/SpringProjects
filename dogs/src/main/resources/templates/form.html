@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1 th:text="${dog}? 'Edit dog' : 'Add new dog'"></h1>
+    <div class="form">
+        <form th:action="@{${dog == null ? '/add' : '/edit/' + dog.id}}" th:object="${dog}" method="post">
+            <label for="name">Name</label>
+                <input id="name" type="text" name="name" th:value="${dog}? *{name}">
+
+            <label for="age">Age</label>
+                <input id="age" type="number" name="age" th:value="${dog}? *{age}">
+
+            <label for="male">Male</label>
+                <input id="male" name="gender" type="radio" value="male" th:checked="${dog}? *{gender} == 'male'">
+
+            <label for="female">Female</label>
+                <input id="female" name="gender" type="radio" value="female"
+                       th:checked="${dog}? ${dog.gender} == 'female'">
+
+            <label for="type">Type</label>
+                <select name="type" id="type">
+                    <option th:each="dogtype : ${listOfTypes}" th:text="${dogtype}"
+                            th:selected="${dog}? ${dog.type eq dogtype}"></option>
+                </select>
+            <label for="length">Length</label>
+                <input id="length" type="number" step="any" name="length" th:value="${dog}? *{length}">
+
+            <label for="height">Height</label>
+                <input id="height" type="number" step="any" name="height" th:value="${dog}? *{height}">
+
+            <label for="favouriteActivity">Favourite Activity</label>
+                <input id="favouriteActivity" type="text" name="favActivity" th:value="${dog}? *{favActivity}">
+
+            <label for="birthDate">Birth date</label>
+                <input id="birthDate" type="date" name="dateOfBirth" th:value="${dog}? *{dateOfBirth}">
+            <input type="submit" th:value="${dog}? 'Edit dog' : 'Add dog'">
+
+        </form>
+    </div>
+    <h3 style="color:red" th:text="${error}"></h3>
+</body>
+</html>

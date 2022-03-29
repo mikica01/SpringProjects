@@ -1,0 +1,22 @@
+form textarea, input:not([type=radio]) {
+    display:block;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header a {
+    padding: 10px;
+}
+header a:not(:first-of-type) {
+    border-left: 1px solid black;
+}
+.priority {
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+}
+.todoEdit {
+    display: block;
+}

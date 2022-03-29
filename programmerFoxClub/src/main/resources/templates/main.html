@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body th:object="${fox}">
+    <ul>
+        <li>
+            <a th:href="'/?name=' + *{name}">Information</a>
+        </li>
+        <li>
+            <a th:href="'/nutritionStore?name=' + *{name}">Nutrition store</a>
+        </li>
+        <li>
+            <a th:href="'/trickCenter?name=' + *{name}">Trick Center</a>
+        </li>
+        <li>
+            <a th:href="'/actionHistory?name=' + *{name}">Action history</a>
+        </li>
+    </ul>
+    <container th:class="${hidden}">
+        <div>
+            <img src="/greenfox.png" alt="A green fox">
+        </div>
+        <p th:text="'This is ' + *{name} +
+    '. Currently living on ' + *{food} +
+    ' and ' + *{drink} + '. ' + *{gender.toLowerCase() eq 'male' ? 'He ' : 'She ' } + 'knows '
+     + *{listOfTricks.size()} + ' tricks.'"></p>
+        <h1>Known tricks</h1>
+        <ul>
+            <li th:each="trick : *{listOfTricks}" th:text="${trick}"></li>
+        </ul>
+    </container>
+    <form action="/setBeverages" method="post" th:class="${beverageVisible == true ? '' : 'hidden'}">
+        <span>Food</span>
+        <select name="food">
+            <option selected th:value="*{food}" th:text="*{food}"></option>
+            <option value="Sajtos pizza" name="food">Sajtos pizza</option>
+            <option value="Tojásos nockedli" name="food">Tojásos nockedli</option>
+            <option value="Melegszenya" name="food">Melegszenya</option>
+            <option value="Túróspalacsinta" name="food">Túróspalacsinta</option>
+        </select>
+        <span>Drink</span>
+        <select name="drink">
+            <option selected th:value="*{drink}" th:text="*{drink}"></option>
+            <option value="Tojáslikőr" name="drink">Tojáslikőr</option>
+            <option value="Bambi" name="drink">Bambi</option>
+            <option value="Csirkeszaft" name="drink">Csirkeszaft</option>
+            <option value="Áfonyalé" name="drink">Áfonyalé</option>
+        </select>
+        <button type="submit" name="name" th:value="*{name}">Change</button>
+    </form>
+    <form th:if="*{listOfTricks.size() < 4}" th:action="'/trickCenter?name=' + *{name}" method="post"
+          th:class="${tricksVisible == true ? '' : 'hidden'}">
+        <select name="trick">
+            <option th:if="*{!listOfTricks.contains('Tyúkvadászat')}" value="Tyúkvadászat" name="trick">Tyúkvadászat
+            </option>
+            <option th:if="*{!listOfTricks.contains('HTML- szerkesztés')}" value="HTML- szerkesztés" name="trick">HTML-
+                szerkesztés
+            </option>
+            <option th:if="*{!listOfTricks.contains('Java programozás')}" value="Java programozás" name="trick">Java
+                programozás
+            </option>
+            <option th:if="*{!listOfTricks.contains('Mértéktelen evés')}" value="Mértéktelen evés" name="trick">
+                Mértéktelen evés
+            </option>
+        </select>
+        <button type="submit" name="redirectName" th:value="*{name}">Add trick</button>
+    </form>
+        <p th:class="${allTheTricks == true ? '' : 'hidden'}" style="color: red" th:unless="*{listOfTricks.size() < 4}">You have learned all the tricks!</p>
+        <p th:if="*{listOfTricks.size() == 0}" th:text="|*{name} hasn't learned any tricks, go and learn some!|">You </p>
+    <div th:class="${historyVisible == true ? '' : 'hidden'}">
+        <h1 th:text="'Action history of ' + *{name}"></h1>
+        <ul>
+            <li th:each="modification : ${modificationList}" th:text="${modification}"></li>
+        </ul>
+    </div>
+</body>
+</html>

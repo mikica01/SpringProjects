@@ -1,0 +1,6 @@
+.hidden {
+    display: none;
+}
+#signup div input{
+    display: block;
+}

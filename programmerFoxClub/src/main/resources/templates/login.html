@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Programmer Fox Club</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div th:class="${loginHidden == true ? 'hidden' : ''}">
+    <h1>Welcome to Programmer Fox Club!</h1>
+    <p>Please provide a name, so you can associate it to your pet!</p>
+    <form action="/login" method="post">
+        <span>Name</span>
+        <input type="text" name="name">
+        <input type="submit" value="GO">
+    </form>
+    </div>
+    <p style="color: red" th:text="${newAccount}"></p>
+    <a href="/signUp" th:text="${signup}"></a>
+    <div th:class="${signUpVisible == true ? '' : 'hidden'}">
+    <form id="signup" action="/signUp" method="post">
+        <h1>Sign up a new fox!</h1>
+        <div>
+        <span>Name</span>
+        <input type="text" name="name" required>
+        <span>Favourite food</span>
+        <input type="text" name="food" required>
+        <span>Favourite drink</span>
+        <input type="text" name="drink" required>
+        </div>
+        <p>Gender</p>
+        <span>Male</span>
+        <input type="radio" name="gender" value="male" required>
+        <span>Female</span>
+        <input type="radio" name="gender" value="female">
+        <input type="submit" value="Sign up">
+    </form>
+    </div>
+</body>
+</html>

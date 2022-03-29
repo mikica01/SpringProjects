@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My first webshop</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+    <div id="header">
+        <h1 id="myShop"><a href="/webshop">My Shop</a></h1>
+        <h1 id="more"><a href="/more-filters">More>></a></h1>
+    </div>
+    <div class="filterButtons">
+        <a href="/only-available">only available</a>
+        <a href="/cheapest-first">cheapest first</a>
+        <a href="/filter-by-type/4">contains nike</a>
+        <a href="/average-stock">average stock</a>
+        <a href="/most-expensive">most expensive</a>
+    </div>
+    <form action="" method="post" th:class="${hidden eq 'hidden'}? 'hidden' : ''">
+        <label for="searchEngine">Search for:</label>
+        <div class="searchDiv">
+            <input id="searchEngine" type="text" placeholder="...something like nike" name="search">
+            <input id="searchButton" type="submit" value="Search"/>
+        </div>
+    </form>
+    <h2 th:text="${average}"></h2>
+    <h2 th:text="${mostExpensive}"></h2>
+    <table id="itemTable" th:class="${hidden eq 'hidden'}? 'hidden' : ''">
+
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity of stock</th>
+        </tr>
+        <tr th:each="item : ${itemList}">
+            <td th:text="${item.getName()}"></td>
+            <td th:text="${item.getDescription()}"></td>
+            <td th:text="${item.getPrice()} + ' Kč'"></td>
+            <td th:text="${item.getQuantityOfStock()}"></td>
+        </tr>
+    </table>
+</body>
+</html>
