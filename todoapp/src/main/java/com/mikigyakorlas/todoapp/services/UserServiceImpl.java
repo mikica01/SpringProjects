@@ -22,18 +22,18 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User findById(String id) throws UserNotFoundException {
-    if (!repo.existsById(Integer.parseInt(id))) {
-      throw new UserNotFoundException();
-    }
-    return repo.findById(Integer.parseInt(id)).get();
+    return repo.findById(Integer.parseInt(id)).orElseThrow(UserNotFoundException::new);
   }
 
   @Override
   public UserDTO findByIdDTO(String id) throws UserNotFoundException {
-    if (!repo.existsById(Integer.parseInt(id))) {
+    int userId;
+    try {
+      userId = Integer.parseInt(id);
+    } catch(NumberFormatException e) {
       throw new UserNotFoundException();
     }
-    return convert(repo.findById(Integer.parseInt(id)).get());
+    return convert(repo.findById(userId).orElseThrow(UserNotFoundException::new));
   }
 
   @Override

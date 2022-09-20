@@ -25,7 +25,7 @@ public class TodoServiceImpl implements TodoService {
     if (!todoRepo.existsById(Integer.parseInt(id))) {
       throw new TodoNotFoundException();
     }
-    return todoRepo.findById(Integer.parseInt(id)).get();
+    return todoRepo.findById(Integer.parseInt(id)).orElse(null);
   }
 
   @Override
@@ -37,7 +37,7 @@ public class TodoServiceImpl implements TodoService {
 
   @Override
   public void modify(String todoId, Todo todo, User user) {
-    Todo beingEdited = todoRepo.findById(Integer.parseInt(todoId)).get();
+    Todo beingEdited = todoRepo.findById(Integer.parseInt(todoId)).orElse(new Todo());
     beingEdited.setPriority(todo.getPriority());
     if (todo.getPriority() != Priority.DONE) {
       beingEdited.setStatus("undone");

@@ -8,6 +8,8 @@ import com.mikigyakorlas.todoapp.models.exceptions.TodoNotFoundException;
 import com.mikigyakorlas.todoapp.models.exceptions.UserNotFoundException;
 import com.mikigyakorlas.todoapp.services.TodoService;
 import com.mikigyakorlas.todoapp.services.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.Arrays;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/api")
 public class TodoAppController {
 
   UserService userService;
@@ -45,6 +49,7 @@ public class TodoAppController {
   }
 
   @PostMapping("/add")
+  @ApiOperation(value = "adds user to db")
   public String addUser(@ModelAttribute User user, Model model) {
     try {
       userService.validation(user);
